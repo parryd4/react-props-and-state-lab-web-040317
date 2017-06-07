@@ -1,8 +1,18 @@
+This lab wouldn't compile until
+```
+$ npm install -g webpack@^2.2.0-rc.3
+$ npm install
+$ npm install webpack@^2.1.0-beta.28 webpack-dev-server@2.1.0-beta.12
+```
+
+
+
+
 # React Props and State Lab
 
 ## Overview
 
-You'll build a small React application where you'll update state in response to an XHR payload and pass props among components to handle updates. 
+You'll build a small React application where you'll update state in response to an XHR payload and pass props among components to handle updates.
 
 ## Animal Shelter
 ![Best Friends](https://media.giphy.com/media/xTiTnz5OOUn49wKbg4/giphy.gif)
