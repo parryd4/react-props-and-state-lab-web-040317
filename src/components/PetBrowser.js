@@ -7,12 +7,9 @@ class PetBrowser extends React.Component {
     return (
       <div className="ui cards">
         {
-          //  <code>&lt;Pet /&gt;</code> &nbsp; components should go here
-        }
-        { //"Wouldn't it be nice if you could pass the tests AND be able to view your app using npm start?"
-          this.props.pets.map( (singlePet) => {
-          return <Pet pet={singlePet} isAdopted={this.props.adoptedPets.includes(singlePet.id)} onAdoptPet={this.props.onAdoptPet} />
-          } )
+          this.props.pets.map( (singlePet) => { // this.props.pets is the array of pets from the Apps state. this.props.adoptedPets is also from App state, array of already adopted pets.
+          return <Pet pet={singlePet} isAdopted={this.props.adoptedPets.includes(singlePet.id)} onAdoptPet={this.props.onAdoptPet} /> // this.props.onAdoptPet is a callback that App passes, this callback can be thought of as the "what happens when adopted"
+        } )
         }
       </div>
     );

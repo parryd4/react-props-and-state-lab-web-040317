@@ -14,8 +14,31 @@ class App extends React.Component {
         type: 'all',
       }
     };
+    this.handleAdoptPet = this.handleAdoptPet.bind(this)
+    this.handleFindPets = this.handleFindPets.bind(this)
+    this.handleFilterTypeChange = this.handleFilterTypeChange.bind(this)
   }
+  handleFilterTypeChange(selectedType){
+    this.setState({
+      filters: Object.assign({}, this.state.filters, { type: selectedType})
+    })
+    // putting debugger here still shows this.state.filters === { type: "all" }
+  }
+  handleAdoptPet(adoptedPetId){
+    this.setState(function(previousState){
+      return {
+        adoptedPets: [...previousState.adoptedPets, adoptedPetId]
+      }
+    })
+  }
+  handleFindPets(){
+    let url = '/api/pets' + (this.state.filters.type === 'all' ? "" : `?type=${this.state.filters.type}`)
 
+    fetch(url)
+      .then(response => response.json())
+      .then(pets => this.setState({ pets }))
+
+  }
   render() {
     return (
       <div className="ui container">
@@ -25,10 +48,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters filters={this.state.filters} onChangeType={this.handleFilterTypeChange} onFindPetsClick={this.handleFindPets}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser adoptedPets={this.state.adoptedPets} pets={this.state.pets} onAdoptPet={this.handleAdoptPet}/>
             </div>
           </div>
         </div>
